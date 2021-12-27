@@ -1,10 +1,18 @@
 <script>
     import auth from '../../auth/authService';
+    import { getContext } from 'svelte';
+    import Message from '../Message.svelte';
+
+    const { open } = getContext('simple-modal');
 
     export let auth0Client;
 
     function login() {
-        auth.loginWithPopup(auth0Client);
+        try {
+            auth.loginWithPopup(auth0Client);
+        } catch (exception) {
+            open(Message, {message: 'An error happened while login!'});
+        }
     }
 </script>
 

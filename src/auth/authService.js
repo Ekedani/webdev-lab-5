@@ -18,7 +18,6 @@ async function loginWithPopup(client, options) {
         token.set(accessToken.__raw);
         isAuthenticated.set(true);
     } catch (e) {
-        // eslint-disable-next-line
         console.error(e);
     } finally {
         popupOpen.set(false);

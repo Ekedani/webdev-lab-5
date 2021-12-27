@@ -4,8 +4,7 @@ import { token } from '../store';
 class GraphQLHelper {
     constructor() {
         /* eslint-disable */
-        //TODO: To .env
-        this.API_URL = 'https://webdev-lab-5.herokuapp.com/v1/graphql';
+        this.API_URL = API_ROOT;
         /* eslint-enable */
     }
 

@@ -5,15 +5,11 @@
     import { games } from '../../store';
     import { getContext } from 'svelte';
     import Message from '../Message.svelte';
-    import Loader from '../Loader.svelte';
 
     const { open } = getContext('simple-modal');
-    let isLoading = false;
 
     const onOkay = (title, studio, genre) => {
-        isLoading = true;
         insertGame(title, studio, genre);
-        isLoading = false;
     };
 
     const insertGame = async (title, studio, genre) => {
@@ -43,9 +39,6 @@
 </script>
 
 <button on:click={showDialog}>Insert</button>
-{#if isLoading}
-    <Loader/>
-{/if}
 
 <style>
     button {

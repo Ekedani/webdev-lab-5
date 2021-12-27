@@ -1,7 +1,8 @@
-// TODO: To .env
 const config = {
-    domain: 'dev-k6-z7po7.us.auth0.com',
-    clientId: 'dlvktR91fimJdgMjuKpXhjbg8OHnY1tK'
+    /* eslint-disable */
+    domain: AUTH_DOMAIN,
+    clientId: AUTH_CLIENT_ID
+    /* eslint-enable */
 };
 
 export default config;
