@@ -1,14 +1,14 @@
 <script>
-    import auth from '../auth/authService';
+    import auth from '../../auth/authService';
 
     export let auth0Client;
 
-    function login() {
-        auth.loginWithPopup(auth0Client);
+    function logout() {
+        auth.logout(auth0Client);
     }
 </script>
 
-<button on:click={login}>Log in</button>
+<button on:click={logout}>Log out</button>
 
 <style>
     button {

@@ -11,4 +11,17 @@ export default class GraphQLRequests {
         }
     }`;
     }
+
+    static insertGame(title, studio, genre) {
+        return ` 
+        mutation MyMutation {
+            insert_lab_5_game_one(object: {title: "${title}", studio: "${studio}", genre: "${genre}"}) {
+            id
+            title
+            studio
+            genre
+            user_id
+            }
+        }`;
+    }
 }
