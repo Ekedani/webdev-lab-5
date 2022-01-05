@@ -24,4 +24,17 @@ export default class GraphQLRequests {
             }
         }`;
     }
+
+    static deleteGameByID(id) {
+        return ` 
+        mutation MyMutation {
+            delete_lab_5_game_by_pk(id: "${id}") {
+                genre
+                id
+                studio
+                title
+                user_id
+            }
+        }`;
+    }
 }

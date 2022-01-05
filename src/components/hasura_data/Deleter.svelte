@@ -2,18 +2,18 @@
     import GraphQLRequests from '../../helpers/GraphQLRequests';
     import GraphQLHelper from '../../helpers/GraphQLHelper';
     import {getContext} from 'svelte';
-    import {isLoading} from '../../store';
+    import { games, isLoading } from '../../store';
     import Message from '../Message.svelte';
 
     const {open} = getContext('simple-modal');
     export let gameID;
 
     async function handleClick() {
-        isLoading.set(true);
         try {
-            //await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.MUTATION_DeleteFilmById(gameID));
-            //open(Message, {message: "Success!"})
-            alert(gameID);
+            isLoading.set(true);
+            await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.deleteGameByID(gameID));
+            games.update((x) => x.filter((game) => game.id !== gameID));
+            open(Message, {message: "Success!"});
         } catch (exception) {
             open(Message, {message: ("Error: " + exception.message)})
         }finally {
