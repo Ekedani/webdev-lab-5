@@ -14,15 +14,16 @@
     async function handleClick() {
         isLoading.set(true);
         try {
-            await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.insertGame(title, studio, genre));
-            open(Message, {modalText: "Success!"})
+            const inserted = await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.insertGame(title, studio, genre));
+            open(Message, {message: "Success!"})
             games.update((n) => [...n, {
-                title,
-                studio,
-                genre
+                id : inserted.insert_lab_5_game_one.id,
+                title : inserted.insert_lab_5_game_one.title,
+                studio : inserted.insert_lab_5_game_one.studio,
+                genre : inserted.insert_lab_5_game_one.genre
             }]);
         } catch (exception) {
-            open(Message, {modalText: ("Error: " + exception.message)})
+            open(Message, {message: ("Error: " + exception.message)})
         } finally {
             isLoading.set(false);
         }
@@ -44,6 +45,7 @@
 
 <style>
     div {
+        padding: 5px;
         align-self: center;
         display: flex;
         flex-direction: row;
