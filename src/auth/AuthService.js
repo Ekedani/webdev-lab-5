@@ -1,6 +1,6 @@
 import createAuth0Client from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, token } from '../store';
-import config from './auth_config';
+import config from './AuthConfig';
 
 function createClient() {
     return createAuth0Client({

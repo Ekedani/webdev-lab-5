@@ -3,7 +3,7 @@
     import GraphQLRequests from './helpers/GraphQLRequests';
     import { games, isAuthenticated, token, isLoading } from './store';
     import { onMount } from 'svelte';
-    import auth from './auth/authService';
+    import auth from './auth/AuthService';
     import LoginButton from './components/auth/Login.svelte';
     import LogoutButton from './components/auth/Logout.svelte';
     import Table from './components/hasura_data/Table.svelte';

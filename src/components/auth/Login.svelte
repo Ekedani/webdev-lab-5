@@ -1,5 +1,5 @@
 <script>
-    import auth from '../../auth/authService';
+    import auth from '../../auth/AuthService';
     import { getContext } from 'svelte';
     import Message from '../Message.svelte';
 
