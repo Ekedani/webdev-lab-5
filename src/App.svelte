@@ -19,7 +19,6 @@
                 GraphQLRequests.getAllGames(),
             );
             games.set(myGames);
-            console.log(JSON.stringify(get(games)));
         }
     });
 
