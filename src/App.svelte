@@ -1,7 +1,7 @@
 <script>
     import http from './helpers/GraphQLHelper';
     import GraphQLRequests from './helpers/GraphQLRequests';
-    import { games, isAuthenticated, token} from './store';
+    import { games, isAuthenticated, token, isLoading } from './store';
     import { onMount } from 'svelte';
     import auth from './auth/authService';
     import LoginButton from './components/auth/Login.svelte';
@@ -9,36 +9,41 @@
     import Table from './components/hasura_data/Table.svelte';
     import Insert from './components/hasura_data/Insert.svelte';
     import { Modal } from 'svelte-simple-modal';
+    import Loader from './components/Loader.svelte';
 
     let auth0Client;
 
     token.subscribe(async (value) => {
         if (value !== '') {
-            try{
+            try {
+                isLoading.set(true);
                 const { lab_5_game: myGames } = await http.startFetchMyQuery(
                     GraphQLRequests.getAllGames(),
                 );
                 games.set(myGames);
-            }
-            catch (exception){
+            } catch (exception) {
                 // eslint-disable-next-line
-                console.log("Will be replaced later: " + exception.message);
+                console.log('Will be replaced later: ' + exception.message);
+            }finally {
+                isLoading.set(false);
             }
         }
     });
 
     onMount(async () => {
-        try{
+        try {
+            isLoading.set(true);
             auth0Client = await auth.createClient();
             isAuthenticated.set(await auth0Client.isAuthenticated());
             const accessToken = await auth0Client.getIdTokenClaims();
             if (accessToken) {
                 token.set(accessToken.__raw);
             }
-        }
-        catch (exception){
+        } catch (exception) {
             // eslint-disable-next-line
-            console.log("Will be replaced later: " + exception.message);
+            console.log('Will be replaced later: ' + exception.message);
+        } finally {
+            isLoading.set(false);
         }
     });
 </script>
@@ -53,6 +58,9 @@
             <Insert/>
             <p>You can see your data below this text:</p>
             <Table games={games}/>
+        {/if}
+        {#if $isLoading}
+            <Loader/>
         {/if}
     </main>
 </Modal>
