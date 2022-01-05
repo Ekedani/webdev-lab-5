@@ -2,18 +2,15 @@
     import auth from '../../auth/authService';
     import { getContext } from 'svelte';
     import Message from '../Message.svelte';
-    import { isLoading } from '../../store';
 
     const { open } = getContext('simple-modal');
 
     export let auth0Client;
 
     function login() {
-        isLoading.set(true);
         auth.loginWithPopup(auth0Client).catch(error => {
             open(Message, { message: 'Error: ' + error.message });
         });
-        isLoading.set(false);
     }
 </script>
 

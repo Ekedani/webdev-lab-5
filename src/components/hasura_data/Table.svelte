@@ -1,6 +1,5 @@
 <script>
     export let games;
-    console.log(JSON.stringify(games))
 </script>
 
 <table>

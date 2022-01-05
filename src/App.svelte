@@ -7,7 +7,7 @@
     import LoginButton from './components/auth/Login.svelte';
     import LogoutButton from './components/auth/Logout.svelte';
     import Table from './components/hasura_data/Table.svelte';
-    import Insert from './components/hasura_data/Insert.svelte';
+    import Insert from './components/hasura_data/Inserter.svelte';
     import { Modal } from 'svelte-simple-modal';
     import Loader from './components/Loader.svelte';
 
