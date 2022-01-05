@@ -10,7 +10,7 @@
         <th>Studio</th>
         <th>Genre</th>
     </tr>
-    {#each $games as game}
+    {#each $games as game (game.id)}
         <tr>
             <td>{game.title}</td>
             <td>{game.studio}</td>
