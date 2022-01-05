@@ -1,3 +1,6 @@
+import { get } from 'svelte/store';
+import { token } from '../store';
+
 class GraphQLHelper {
     constructor() {
         /* eslint-disable */
@@ -12,7 +15,10 @@ class GraphQLHelper {
                 query: operationsDoc,
                 variables: variables,
                 operationName: operationName
-            })
+            }),
+            headers: {
+                Authorization: `Bearer ${get(token)}`
+            }
         }).then((result) => {
             return result.json();
         });
