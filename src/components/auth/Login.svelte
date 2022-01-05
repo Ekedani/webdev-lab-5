@@ -8,11 +8,9 @@
     export let auth0Client;
 
     function login() {
-        try {
-            auth.loginWithPopup(auth0Client);
-        } catch (exception) {
-            open(Message, {message: 'An error happened while login!'});
-        }
+        auth.loginWithPopup(auth0Client).catch(error => {
+            open(Message, { message: 'Error: ' + error.message });
+        });
     }
 </script>
 

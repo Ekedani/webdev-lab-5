@@ -1,10 +1,16 @@
 <script>
     import auth from '../../auth/authService';
+    import Message from '../Message.svelte';
+    import { getContext } from 'svelte';
 
     export let auth0Client;
 
+    const { open } = getContext('simple-modal');
+
     function logout() {
-        auth.logout(auth0Client);
+        auth.logout(auth0Client).catch(error => {
+            open(Message, { message: 'Error: ' + error.message });
+        });
     }
 </script>
 
