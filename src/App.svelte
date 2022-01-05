@@ -1,15 +1,16 @@
 <script>
     import http from './helpers/GraphQLHelper';
     import GraphQLRequests from './helpers/GraphQLRequests';
-    import { games, isAuthenticated, token, isLoading } from './store';
+    import { games, isAuthenticated, token, isLoading, modal } from './store';
     import { onMount } from 'svelte';
     import auth from './auth/AuthService';
     import LoginButton from './components/auth/Login.svelte';
     import LogoutButton from './components/auth/Logout.svelte';
     import Table from './components/hasura_data/Table.svelte';
     import Insert from './components/hasura_data/Inserter.svelte';
-    import { Modal } from 'svelte-simple-modal';
+    import { bind, Modal } from 'svelte-simple-modal';
     import Loader from './components/Loader.svelte';
+    import Message from './components/Message.svelte';
 
     let auth0Client;
 
@@ -22,9 +23,8 @@
                 );
                 games.set(myGames);
             } catch (exception) {
-                // eslint-disable-next-line
-                console.log('Will be replaced later: ' + exception.message);
-            }finally {
+                modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+            } finally {
                 isLoading.set(false);
             }
         }
@@ -40,16 +40,14 @@
                 token.set(accessToken.__raw);
             }
         } catch (exception) {
-            // eslint-disable-next-line
-            console.log('Will be replaced later: ' + exception.message);
+            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
             isLoading.set(false);
         }
     });
 </script>
-
-<Modal>
-    <main>
+<main>
+    <Modal show={$modal}>
         {#if !$isAuthenticated}
             <h1>Please, log in before start</h1>
             <LoginButton auth0Client={auth0Client}/>
@@ -59,11 +57,12 @@
             <p>You can see your data below this text:</p>
             <Table games={games}/>
         {/if}
-        {#if $isLoading}
-            <Loader/>
-        {/if}
-    </main>
-</Modal>
+    </Modal>
+    {#if $isLoading}
+        <Loader/>
+    {/if}
+</main>
+
 
 <style>
     main {

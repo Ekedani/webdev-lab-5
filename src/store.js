@@ -8,3 +8,4 @@ export const error = writable();
 export const games = writable([]);
 
 export const isLoading = writable(false);
+export const modal = writable(null);
