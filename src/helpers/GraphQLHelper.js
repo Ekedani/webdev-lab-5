@@ -1,6 +1,3 @@
-import { get } from 'svelte/store';
-import { token } from '../store';
-
 class GraphQLHelper {
     constructor() {
         /* eslint-disable */
@@ -9,19 +6,16 @@ class GraphQLHelper {
     }
 
     async fetchGraphQL(operationsDoc, operationName, variables) {
-        const result = await fetch(this.API_URL, {
+        return fetch(this.API_URL, {
             method: 'POST',
             body: JSON.stringify({
                 query: operationsDoc,
                 variables: variables,
                 operationName: operationName
-            }),
-            headers: {
-                Authorization: `Bearer ${get(token)}`
-            }
+            })
+        }).then((result) => {
+            return result.json();
         });
-
-        return await result.json();
     }
 
     fetchMyQuery(operationsDoc) {
@@ -32,7 +26,7 @@ class GraphQLHelper {
         const { errors, data } = await this.fetchMyQuery(operationsDoc);
 
         if (errors) {
-            throw new Error(errors);
+            throw new Error(errors[0].message);
         }
         return data;
     }
@@ -43,7 +37,7 @@ class GraphQLHelper {
             variables
         );
         if (errors) {
-            throw new Error(errors);
+            throw new Error(errors[0].message);
         }
         return data;
     }
