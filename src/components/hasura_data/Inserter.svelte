@@ -1,9 +1,10 @@
 <script>
     import GraphQLHelper from '../../helpers/GraphQLHelper';
     import GraphQLRequests from '../../helpers/GraphQLRequests';
-    import { games, isLoading } from '../../store';
+    import { games, isLoading, modal } from '../../store';
     import { getContext } from 'svelte';
     import Message from '../Message.svelte';
+    import { bind } from 'svelte-simple-modal';
 
     const { open } = getContext('simple-modal');
 
@@ -23,7 +24,7 @@
                 genre : inserted.insert_lab_5_game_one.genre
             }]);
         } catch (exception) {
-            open(Message, {message: ("Error: " + exception.message)})
+            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
             isLoading.set(false);
         }

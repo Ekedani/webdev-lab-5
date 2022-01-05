@@ -2,8 +2,9 @@
     import GraphQLRequests from '../../helpers/GraphQLRequests';
     import GraphQLHelper from '../../helpers/GraphQLHelper';
     import { getContext } from 'svelte';
-    import { games, isLoading } from '../../store';
+    import { games, isLoading, modal } from '../../store';
     import Message from '../Message.svelte';
+    import { bind } from 'svelte-simple-modal';
 
     const { open } = getContext('simple-modal');
     export let gameID;
@@ -15,7 +16,7 @@
             games.update((x) => x.filter((game) => game.id !== gameID));
             open(Message, { message: 'Success!' });
         } catch (exception) {
-            open(Message, { message: ('Error: ' + exception.message) });
+            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
             isLoading.set(false);
         }

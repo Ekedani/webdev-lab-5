@@ -2,7 +2,8 @@
     import auth from '../../auth/AuthService';
     import Message from '../Message.svelte';
     import { getContext } from 'svelte';
-    import { isLoading } from '../../store';
+    import { isLoading, modal } from '../../store';
+    import { bind } from 'svelte-simple-modal';
 
     export let auth0Client;
 
@@ -10,8 +11,8 @@
 
     function logout() {
         isLoading.set(true);
-        auth.logout(auth0Client).catch(error => {
-            open(Message, { message: 'Error: ' + error.message });
+        auth.logout(auth0Client).catch(exception => {
+            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         });
         isLoading.set(false);
     }
