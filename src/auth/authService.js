@@ -2,8 +2,8 @@ import createAuth0Client from '@auth0/auth0-spa-js';
 import { user, isAuthenticated, popupOpen, token } from '../store';
 import config from './auth_config';
 
-async function createClient() {
-    return await createAuth0Client({
+function createClient() {
+    return createAuth0Client({
         domain: config.domain,
         client_id: config.clientId
     });
