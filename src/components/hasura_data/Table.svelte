@@ -1,5 +1,4 @@
 <script>
-    import Loader from '../Loader.svelte';
     export let games;
     console.log(JSON.stringify(games))
 </script>

@@ -14,19 +14,31 @@
 
     token.subscribe(async (value) => {
         if (value !== '') {
-            const { lab_5_game: myGames } = await http.startFetchMyQuery(
-                GraphQLRequests.getAllGames(),
-            );
-            games.set(myGames);
+            try{
+                const { lab_5_game: myGames } = await http.startFetchMyQuery(
+                    GraphQLRequests.getAllGames(),
+                );
+                games.set(myGames);
+            }
+            catch (exception){
+                // eslint-disable-next-line
+                console.log("Will be replaced later: " + exception.message);
+            }
         }
     });
 
     onMount(async () => {
-        auth0Client = await auth.createClient();
-        isAuthenticated.set(await auth0Client.isAuthenticated());
-        const accessToken = await auth0Client.getIdTokenClaims();
-        if (accessToken) {
-            token.set(accessToken.__raw);
+        try{
+            auth0Client = await auth.createClient();
+            isAuthenticated.set(await auth0Client.isAuthenticated());
+            const accessToken = await auth0Client.getIdTokenClaims();
+            if (accessToken) {
+                token.set(accessToken.__raw);
+            }
+        }
+        catch (exception){
+            // eslint-disable-next-line
+            console.log("Will be replaced later: " + exception.message);
         }
     });
 </script>
