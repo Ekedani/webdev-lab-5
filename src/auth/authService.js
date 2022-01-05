@@ -17,10 +17,10 @@ async function loginWithPopup(client, options) {
         const accessToken = await client.getIdTokenClaims();
         token.set(accessToken.__raw);
         isAuthenticated.set(true);
-    } catch (e) {
-        console.error(e);
-    } finally {
         popupOpen.set(false);
+    } catch (error) {
+        popupOpen.set(false);
+        throw error;
     }
 }
 
