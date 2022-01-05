@@ -1,7 +1,6 @@
 <script>
     import http from './helpers/GraphQLHelper';
     import GraphQLRequests from './helpers/GraphQLRequests';
-    import { get } from 'svelte/store';
     import { games, isAuthenticated, token} from './store';
     import { onMount } from 'svelte';
     import auth from './auth/authService';
