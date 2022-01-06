@@ -11,7 +11,8 @@
     "rules": {
         "semi": [2, "always"],
         "indent": ["error", 4],
-        "space-before-function-paren": ["off", "never"]
+        "space-before-function-paren": ["off", "never"],
+        "no-undef": ["off", "never"]
     },
     "plugins": ["sonarjs"]
 }
