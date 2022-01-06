@@ -65,6 +65,15 @@
 
 
 <style>
+    :global(:root){
+        --main-color: #f44336;
+        --button-text: black;
+        --button-text-hover: white;
+        --element-background: white;
+        --table-border-color: #ddd;
+        --overlay-color: rgba(255,255,255,0.5);
+    }
+
     main {
         display: flex;
         flex-direction: column;
@@ -76,7 +85,7 @@
     }
 
     h1 {
-        color: #f44336;
+        color: var(--main-color);
         text-transform: uppercase;
         font-size: 4em;
         font-weight: 100;

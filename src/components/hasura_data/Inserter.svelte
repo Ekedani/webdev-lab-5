@@ -57,14 +57,14 @@
     button {
         width: 100px;
         text-transform: uppercase;
-        background-color: white;
-        color: black;
-        border: 2px solid #f44336;
+        background-color: var(--button-text-hover);
+        color: var(--button-text);
+        border: 2px solid var(--main-color);
     }
 
     button:hover {
-        background-color: #f44336;
-        color: white;
+        background-color: var(--main-color);
+        color: var(--button-text-hover);
     }
 
     @media (max-width: 640px) {
