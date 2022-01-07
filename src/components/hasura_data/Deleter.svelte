@@ -13,10 +13,20 @@
         try {
             isLoading.set(true);
             await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.deleteGameByID(gameID));
-            games.update((x) => x.filter((game) => game.id !== gameID));
+
+            // Cheapest way to delete with maintaining order
+            let index = $games.findIndex(game => game.id === gameID);
+            games.update(x => {
+                while (index < x.length - 1) {
+                    x[index] = x[++index];
+                }
+                x.pop();
+                return x;
+            });
+
             open(Message, { message: 'Success!' });
         } catch (exception) {
-            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+            modal.set(bind(Message, { message: ('Error: ' + exception.message) }));
         } finally {
             isLoading.set(false);
         }
