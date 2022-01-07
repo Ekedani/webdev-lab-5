@@ -7,5 +7,5 @@ export const popupOpen = writable(false);
 export const error = writable();
 export const games = writable([]);
 
-export const isLoading = writable(false);
+export const isLoading = writable(0);
 export const modal = writable(null);

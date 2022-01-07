@@ -13,7 +13,7 @@
     let genre = '';
 
     async function handleClick() {
-        isLoading.set(true);
+        isLoading.update(n => n + 1);
         try {
             const inserted = await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.insertGame(title, studio, genre));
             open(Message, {message: "Success!"})
@@ -26,7 +26,7 @@
         } catch (exception) {
             modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
-            isLoading.set(false);
+            isLoading.update(n => n - 1);
         }
     }
 </script>

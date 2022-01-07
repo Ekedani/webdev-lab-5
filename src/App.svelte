@@ -17,7 +17,7 @@
     token.subscribe(async (value) => {
         if (value !== '') {
             try {
-                isLoading.set(true);
+                isLoading.update(n => n + 1);
                 const { lab_5_game: myGames } = await http.startFetchMyQuery(
                     GraphQLRequests.getAllGames(),
                 );
@@ -25,14 +25,14 @@
             } catch (exception) {
                 modal.set(bind(Message, { message: ("Error: " + exception.message)}));
             } finally {
-                isLoading.set(false);
+                isLoading.update(n => n - 1);
             }
         }
     });
 
     onMount(async () => {
         try {
-            isLoading.set(true);
+            isLoading.update(n => n + 1);
             auth0Client = await auth.createClient();
             isAuthenticated.set(await auth0Client.isAuthenticated());
             const accessToken = await auth0Client.getIdTokenClaims();
@@ -42,7 +42,7 @@
         } catch (exception) {
             modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
-            isLoading.set(false);
+            isLoading.update(n => n - 1);
         }
     });
 </script>
