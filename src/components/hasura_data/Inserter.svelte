@@ -27,16 +27,16 @@
                 throw Error("Title field must be filled!");
             }
             const inserted = await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.insertGame(title, studio, genre));
-            open(Message, {message: "Success!"})
             games.update((n) => [...n, {
                 id : inserted.insert_lab_5_game_one.id,
                 title : inserted.insert_lab_5_game_one.title,
                 studio : inserted.insert_lab_5_game_one.studio,
                 genre : inserted.insert_lab_5_game_one.genre
             }]);
+            $modal = bind(Message, { message: 'Success!' });
             resetValues();
         } catch (exception) {
-            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+            $modal = bind(Message, { message: ("Error: " + exception.message)});
         } finally {
             $isLoading--;
         }

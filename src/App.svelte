@@ -21,9 +21,9 @@
                 const { lab_5_game: myGames } = await http.startFetchMyQuery(
                     GraphQLRequests.getAllGames(),
                 );
-                games.set(myGames);
+                $games = myGames;
             } catch (exception) {
-                modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+                $modal = bind(Message, { message: ("Error: " + exception.message)});
             } finally {
                 $isLoading--;
             }
@@ -34,13 +34,13 @@
         try {
             $isLoading++;
             auth0Client = await auth.createClient();
-            isAuthenticated.set(await auth0Client.isAuthenticated());
+            $isAuthenticated = await auth0Client.isAuthenticated();
             const accessToken = await auth0Client.getIdTokenClaims();
             if (accessToken) {
-                token.set(accessToken.__raw);
+                $token = accessToken.__raw;
             }
         } catch (exception) {
-            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+            $modal = bind(Message, { message: ("Error: " + exception.message)});
         } finally {
             $isLoading--;
         }
