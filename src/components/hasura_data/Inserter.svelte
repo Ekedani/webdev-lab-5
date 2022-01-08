@@ -2,11 +2,8 @@
     import GraphQLHelper from '../../helpers/GraphQLHelper';
     import GraphQLRequests from '../../helpers/GraphQLRequests';
     import { games, isLoading, modal } from '../../store';
-    import { getContext } from 'svelte';
     import Message from '../Message.svelte';
     import { bind } from 'svelte-simple-modal';
-
-    const { open } = getContext('simple-modal');
 
     const defaultValue = '';
 

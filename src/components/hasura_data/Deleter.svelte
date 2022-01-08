@@ -1,12 +1,10 @@
 <script>
     import GraphQLRequests from '../../helpers/GraphQLRequests';
     import GraphQLHelper from '../../helpers/GraphQLHelper';
-    import { getContext } from 'svelte';
     import { games, isLoading, modal } from '../../store';
     import Message from '../Message.svelte';
     import { bind } from 'svelte-simple-modal';
 
-    const { open } = getContext('simple-modal');
     export let gameID;
 
     async function handleClick() {
