@@ -7,7 +7,6 @@ export default class GraphQLRequests {
             id
             studio
             title
-            user_id
         }
     }`;
     }
@@ -20,7 +19,6 @@ export default class GraphQLRequests {
             title
             studio
             genre
-            user_id
             }
         }`;
     }
@@ -33,7 +31,6 @@ export default class GraphQLRequests {
                 id
                 studio
                 title
-                user_id
             }
         }`;
     }
