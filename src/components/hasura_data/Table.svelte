@@ -11,7 +11,7 @@
         <th>Genre</th>
         <th>Delete</th>
     </tr>
-    {#each $games as game (game.id)}
+    {#each $games as game, key (game.id)}
         <tr>
             <td>{game.title}</td>
             <td>{game.studio}</td>
