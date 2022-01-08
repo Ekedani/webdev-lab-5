@@ -15,6 +15,9 @@
     async function handleClick() {
         isLoading.update(n => n + 1);
         try {
+            if(!title){
+                throw Error("Title field must be filled!");
+            }
             const inserted = await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.insertGame(title, studio, genre));
             open(Message, {message: "Success!"})
             games.update((n) => [...n, {
