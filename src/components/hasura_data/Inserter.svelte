@@ -8,14 +8,16 @@
 
     const { open } = getContext('simple-modal');
 
-    let title = '';
-    let studio = '';
-    let genre = '';
+    const defaultValue = '';
+
+    let title = defaultValue;
+    let studio = defaultValue;
+    let genre = defaultValue;
 
     function resetValues(){
-        title = '';
-        studio = '';
-        genre = '';
+        title = defaultValue;
+        studio = defaultValue;
+        genre = defaultValue;
     }
 
     async function handleClick() {
