@@ -11,7 +11,7 @@
 
     async function handleClick() {
         try {
-            isLoading.update(n => n + 1);
+            $isLoading++;
             await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.deleteGameByID(gameID));
 
             // Cheapest way to delete with maintaining order
@@ -28,7 +28,7 @@
         } catch (exception) {
             modal.set(bind(Message, { message: ('Error: ' + exception.message) }));
         } finally {
-            isLoading.update(n => n - 1);
+            $isLoading--;
         }
     }
 </script>

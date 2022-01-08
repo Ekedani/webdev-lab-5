@@ -21,7 +21,7 @@
     }
 
     async function handleClick() {
-        isLoading.update(n => n + 1);
+        $isLoading++;
         try {
             if(!title){
                 throw Error("Title field must be filled!");
@@ -38,7 +38,7 @@
         } catch (exception) {
             modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
-            isLoading.update(n => n - 1);
+            $isLoading--;
         }
     }
 </script>
