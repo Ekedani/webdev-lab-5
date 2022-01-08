@@ -12,6 +12,12 @@
     let studio = '';
     let genre = '';
 
+    function resetValues(){
+        title = '';
+        studio = '';
+        genre = '';
+    }
+
     async function handleClick() {
         isLoading.update(n => n + 1);
         try {
@@ -26,6 +32,7 @@
                 studio : inserted.insert_lab_5_game_one.studio,
                 genre : inserted.insert_lab_5_game_one.genre
             }]);
+            resetValues();
         } catch (exception) {
             modal.set(bind(Message, { message: ("Error: " + exception.message)}));
         } finally {
