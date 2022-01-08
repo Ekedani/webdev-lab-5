@@ -54,7 +54,6 @@
         {:else}
             <LogoutButton auth0Client={auth0Client}/>
             <Insert/>
-            <p>You can see your data below this text:</p>
             <Table games={games}/>
         {/if}
     </Modal>

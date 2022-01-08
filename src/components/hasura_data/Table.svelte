@@ -3,23 +3,29 @@
 
     export let games;
 </script>
-
-<table>
-    <tr>
-        <th>Title</th>
-        <th>Studio</th>
-        <th>Genre</th>
-        <th>Delete</th>
-    </tr>
-    {#each $games as game, key (game.id)}
+{#if !($games.length)}
+    <p>You have not games to play. Maybe you should add some?</p>
+{:else if ($games.length)}
+    <p>You can see your data below this text:</p>
+    <table>
         <tr>
-            <td>{game.title}</td>
-            <td>{game.studio}</td>
-            <td>{game.genre}</td>
-            <td><Deleter gameID={game.id}/></td>
+            <th>Title</th>
+            <th>Studio</th>
+            <th>Genre</th>
+            <th>Delete</th>
         </tr>
-    {/each}
-</table>
+        {#each $games as game, key (game.id)}
+            <tr>
+                <td>{game.title}</td>
+                <td>{game.studio}</td>
+                <td>{game.genre}</td>
+                <td>
+                    <Deleter gameID={game.id}/>
+                </td>
+            </tr>
+        {/each}
+    </table>
+{/if}
 
 <style>
     table {
