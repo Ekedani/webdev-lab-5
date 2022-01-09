@@ -11,15 +11,8 @@
         try {
             $isLoading++;
             await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.deleteGameByID(gameID));
-            // Cheapest way to delete with maintaining order
             let index = $games.findIndex(game => game.id === gameID);
-            games.update(x => {
-                while (index < x.length - 1) {
-                    x[index] = x[++index];
-                }
-                x.pop();
-                return x;
-            });
+            games.update((x) => x.splice(index, 1));
             $modal = bind(Message, { message: 'Success!' });
         } catch (exception) {
             $modal = bind(Message, { message: ("Error: " + exception.message)});
