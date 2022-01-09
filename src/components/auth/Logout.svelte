@@ -10,11 +10,11 @@
     const { open } = getContext('simple-modal');
 
     function logout() {
-        isLoading.update(n => n + 1);
+        $isLoading++;
         auth.logout(auth0Client).catch(exception => {
-            modal.set(bind(Message, { message: ("Error: " + exception.message)}));
+            $modal = (bind(Message, { message: ("Error: " + exception.message)}));
         });
-        isLoading.update(n => n - 1);
+        $isLoading--;
     }
 </script>
 
