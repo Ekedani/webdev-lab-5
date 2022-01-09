@@ -12,10 +12,13 @@
             $isLoading++;
             await GraphQLHelper.startExecuteMyMutation(GraphQLRequests.deleteGameByID(gameID));
             let index = $games.findIndex(game => game.id === gameID);
-            games.update((x) => x.splice(index, 1));
+            games.update((x) => {
+                x.splice(index, 1);
+                return x;
+            });
             $modal = bind(Message, { message: 'Success!' });
         } catch (exception) {
-            $modal = bind(Message, { message: ("Error: " + exception.message)});
+            $modal = bind(Message, { message: ('Error: ' + exception.message) });
         } finally {
             $isLoading--;
         }
